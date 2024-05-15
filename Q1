@@ -1,0 +1,31 @@
+class Solution {
+    public int numIslands(char[][] grid) {
+        if (grid == null || grid.length == 0) {
+            return 0;
+        }
+        
+        int islandCount = 0;
+        for (int row = 0; row < grid.length; row++) {
+            for (int col = 0; col < grid[0].length; col++) {
+                if (grid[row][col] == '1') {
+                    islandCount++;
+                    markVisited(grid, row, col);
+                }
+            }
+        }
+        
+        return islandCount;
+    }
+    
+    private void markVisited(char[][] grid, int row, int col) {
+        if (row < 0 || row >= grid.length || col < 0 || col >= grid[0].length || grid[row][col] != '1') {
+            return;
+        }
+        
+        grid[row][col] = '0'; 
+        markVisited(grid, row + 1, col); 
+        markVisited(grid, row - 1, col); 
+        markVisited(grid, row, col + 1); 
+        markVisited(grid, row, col - 1);
+    }   
+}//Code by Gokul
